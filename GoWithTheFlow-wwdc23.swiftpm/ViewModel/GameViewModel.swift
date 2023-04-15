@@ -46,12 +46,12 @@ struct AnimatedCircleViewOverlay: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.fontBlue, lineWidth: 5)
+                .stroke(Color.white, lineWidth: 5)
                 .scaleEffect(animatedCircleView.firstCircle)
                 .opacity(Double(animatedCircleView.opacity))
             
             Circle()
-                .stroke(Color.fontBlue, lineWidth: 5)
+                .stroke(Color.white, lineWidth: 5)
                 .scaleEffect(animatedCircleView.secondCircle)
                 .opacity(Double(animatedCircleView.opacity))
         }
@@ -72,38 +72,5 @@ struct Shake: GeometryEffect {
         ProjectionTransform(CGAffineTransform(translationX: amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),y: 0))
     }
 }
-//MARK: TUTORIAL
-struct TutorialAnimation: View {
-    
-    @StateObject var animatedCircleRight = AnimatedCircleView()
-    @StateObject var animatedCircleLeft = AnimatedCircleView()
-    
-    
-    var body: some View {
-        ZStack {
-            //DIREITA
-            AnimatedCircleViewOverlay(animatedCircleView: animatedCircleRight)
-                .frame(width: 400, height: 400)
-                .position(x: 600, y: 200)
-            //ESQUERDA
-            AnimatedCircleViewOverlay(animatedCircleView: animatedCircleLeft)
-                .frame(width: 400, height: 400)
-                .position(x: 250, y: 200)
-            
 
-
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.animatedCircleRight.animateCircles()
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                self.animatedCircleRight.animateCircles()
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.5) {
-                self.animatedCircleLeft.animateCircles()
-            }
-        }
-    }
-}
 

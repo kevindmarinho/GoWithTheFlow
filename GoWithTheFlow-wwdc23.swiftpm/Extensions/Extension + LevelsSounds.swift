@@ -25,31 +25,76 @@ extension GameView{
            // isStart = true
             
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) {
+        // timer para ativar touch e text do level
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
             isStart = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 9.0) {
             onTouch = true
         }
     }
-    //MARK: LEVELONE
+    //MARK: LEVEL ONE
     func levelOneSound(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
             self.playSoundRight(sound: .SoundsLevelOneFirst)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.5){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5){
             self.playSoundLeft(sound: .SoundsLevelOneSecond)
                 
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 7.5){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.5){
             self.playSoundRight(sound: .SoundsLevelOneThird)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 9.5){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8.5){
             self.playSoundLeft(sound: .SoundsLevelOneFourth)
+            isStart = true
             
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 12.0){
         onTouch = true
         showTextError = false
-        isStart = true
+        }
+    }
+   //MARK: LEVEL TWO
+    func levelTwoSound(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+            self.playSoundLeft(sound: .SoundLevelTwoFirst)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0){
+            self.playSoundRight(sound: .SoundsLevelTwoSecond)
+                
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.5){
+            self.playSoundRight(sound: .SoundLevelTwoThird)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8.5){
+            self.playSoundLeft(sound: .SoundLevelTwoFourth)
+            isStart = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 12.0){
+        onTouch = true
+        showTextError = false
+        }
+    }
+    
+    func levelThreeSound(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+            self.playSoundRight(sound: .SoundsLevelThreeFirst)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0){
+            self.playSoundLeft(sound: .SoundsLevelThreeSecond)
+                
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.5){
+            self.playSoundRight(sound: .SoundsLevelThreeThird)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8.5){
+            self.playSoundRight(sound: .SoundsLevelThreeFourth)
+            isStart = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 12.0){
+        onTouch = true
+        showTextError = false
         }
     }
 

@@ -44,11 +44,13 @@ extension GameView {
     }
     
     enum levelOneWords{
-        static let textTutorial = "Shall we practice ? Relax and play the side you hear."
-        static let levelOne = "Ok, now let's try it with sound only, pay attention."
+        static let textTutorial = "Relax and pay attention"
+        static let levelOne = "Ok, now let's try it with different sounds, pay attention to the correct side."
+        static let levelTwo = "Inicio do level two"
+        static let levelTree = "Inicio do level three"
         static let textError = "Breathe... and try again"
         static let congrats = "Congrats"
-        static let letsTryText = "Your turn!"
+        static let letsTryText = "Your turn! Go With The Flow"
     }
     
     enum textsNext{

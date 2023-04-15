@@ -12,4 +12,6 @@ extension Color {
     static let backgroundBlue = Color("backgroundColor")
     static let fontBlue = Color("fontColor")
     static let backgroundShake = Color("backgroundShakeColor")
+    static let orangeCircle = Color("orangeCircle")
+    static let greenCircle = Color("greenCircle")
 }
