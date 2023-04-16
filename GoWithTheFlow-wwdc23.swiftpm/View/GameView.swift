@@ -10,6 +10,7 @@ import AVFoundation
 import AVKit
 import Foundation
 import UIKit
+import SpriteKit
 
 
 
@@ -73,7 +74,11 @@ struct GameView: View {
     @State var impactRigid = UIImpactFeedbackGenerator(style: .rigid)
     let generator = UINotificationFeedbackGenerator()
     
-    
+    var scene: SKScene{
+        let scene = LeafAnimation()
+        scene.scaleMode = .resizeFill
+        return scene
+    }
     
     var body: some View {
         ZStack{
@@ -372,12 +377,8 @@ struct GameView: View {
                 }
                 print("tocando")
             }
-            .gesture(TapGesture().onEnded{
-                
-            })
-            
-            
-            
+  
+            SpriteView(scene: scene, options: [.allowsTransparency])
         }
     }
     
