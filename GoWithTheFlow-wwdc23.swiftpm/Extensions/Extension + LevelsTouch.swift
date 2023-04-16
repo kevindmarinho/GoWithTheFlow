@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import UIKit
+
 @available(iOS 16.0, *)
 extension GameView {
     //MARK: TUTORIAL TOUCH
@@ -18,30 +20,33 @@ extension GameView {
                 //ESQUERDA
                 if tap.x < UIScreen.main.bounds.width / 2 {
                     if tutorialSequence[tutorialIndex]  == .SoundsLevelThreeFirst  {
+                        impactRigid.impactOccurred()
                         self.playSoundLeft(sound: .SoundsLevelThreeFirst)
                         tutorialIndex += 1
                     }else{
                         withAnimation(.default){
                             self.attempts += 1
                         }
+                        impactRigid.impactOccurred()
                         tutorialIndex = 0
                         showTextError = true
                         onTouch = false
                         isPlayerTutorial = false
+
                     }
                 }
                 //DIREITA
                 else {
                     if tutorialSequence[tutorialIndex] == .firstTutorialSong {
-
+                        impactRigid.impactOccurred()
                         self.playSoundRight(sound: .firstTutorialSong)
                         tutorialIndex += 1
                     } else if tutorialSequence[tutorialIndex] == .secondTutorialSong{
-
+                        impactRigid.impactOccurred()
                         self.playSoundRight(sound: .secondTutorialSong)
                         tutorialIndex += 1
                     } else {
-
+                        impactRigid.impactOccurred()
                         tutorialIndex = 0
                         showTextError = true
                         onTouch = false
@@ -58,12 +63,16 @@ extension GameView {
         if tutorialIndex == tutorialSequence.count {
             print("acertou o tutorial")
             isTextLevelOne = true
-            isTutoriaComplete = true
+            withAnimation(.easeInOut(duration: 3)){
+                isTutoriaComplete = true
+            }
             onTouch = false
             istutorialStart = false
             showTextError = false
             isStart = false
             isNext = false
+            
+            
             
         }
     }
@@ -77,15 +86,18 @@ extension GameView {
                 //ESQUERDA
                 if tap.x < UIScreen.main.bounds.width / 2 {
                     if levelOneSequence[levelOneIndex]  == .SoundsLevelOneSecond  {
+                        impactRigid.impactOccurred()
                         self.playSoundLeft(sound: .SoundsLevelOneSecond)
                         levelOneIndex += 1
                     } else if levelOneSequence[levelOneIndex] == .SoundsLevelOneFourth{
+                        impactRigid.impactOccurred()
                         self.playSoundLeft(sound: .SoundsLevelOneFourth)
                         levelOneIndex += 1
                     }else{
                         withAnimation(.default){
                             self.attempts += 1
                         }
+                        impactRigid.impactOccurred()
                         levelOneIndex = 0
                         showTextError = true
                         onTouch = false
@@ -96,14 +108,15 @@ extension GameView {
                 //DIREITA
                 else {
                     if levelOneSequence[levelOneIndex] == .SoundsLevelOneFirst {
-
+                        impactRigid.impactOccurred()
                         self.playSoundRight(sound: .SoundsLevelOneFirst)
                         levelOneIndex += 1
                     } else if levelOneSequence[levelOneIndex] == .SoundsLevelOneThird{
-
+                        impactRigid.impactOccurred()
                         self.playSoundRight(sound: .SoundsLevelOneThird)
                         levelOneIndex += 1
                     } else {
+                        impactRigid.impactOccurred()
                         levelOneIndex = 0
                         showTextError = true
                         onTouch = false
@@ -125,7 +138,11 @@ extension GameView {
             showTextError = false
             isStart = false
             isLevelOneStartSound = false
-            isLevelOneComplete = true
+            withAnimation(.easeInOut(duration: 3)){
+                isLevelOneComplete = true
+            }
+
+
         }
     }
     //MARK: LEVEL TWO
@@ -138,16 +155,19 @@ extension GameView {
                 //ESQUERDA
                 if tap.x < UIScreen.main.bounds.width / 2 {
                     if levelTwoSequence[levelTwoIndex]  == .SoundLevelTwoFirst  {
+                        impactRigid.impactOccurred()
                         print("acertou o primeiro")
                         self.playSoundLeft(sound: .SoundLevelTwoFirst)
                         levelTwoIndex += 1
                     }else if levelTwoSequence[levelTwoIndex]  == .SoundLevelTwoFourth{
+                        impactRigid.impactOccurred()
                         self.playSoundLeft(sound: .SoundLevelTwoFourth)
                         levelTwoIndex += 1
                     }else{
                         withAnimation(.default){
                             self.attempts += 1
                         }
+                        impactRigid.impactOccurred()
                         levelTwoIndex = 0
                         showTextError = true
                         onTouch = false
@@ -157,12 +177,15 @@ extension GameView {
                 //DIREITA
                 else {
                     if levelTwoSequence[levelTwoIndex] == .SoundsLevelTwoSecond {
+                        impactRigid.impactOccurred()
                         self.playSoundRight(sound: .SoundsLevelTwoSecond)
                         levelTwoIndex += 1
                     } else if levelTwoSequence[levelTwoIndex] == .SoundLevelTwoThird{
+                        impactRigid.impactOccurred()
                         self.playSoundRight(sound: .SoundLevelTwoThird)
                         levelTwoIndex += 1
                     } else {
+                        impactRigid.impactOccurred()
                         levelTwoIndex = 0
                         showTextError = true
                         onTouch = false
@@ -183,9 +206,9 @@ extension GameView {
             showTextError = false
             isLevelTwoStartSound = false
             isStart = false
-            isLevelTwoComplete = true
-            
-            
+            withAnimation(.easeInOut(duration: 3)){
+                isLevelTwoComplete = true
+            }
         }
     }
     //MARK: LEVEL THREE
@@ -197,6 +220,7 @@ extension GameView {
                 //ESQUERDA
                 if tap.x < UIScreen.main.bounds.width / 2 {
                     if levelThreeSequence[levelThreeIndex]  == .SoundsLevelThreeSecond  {
+                        impactRigid.impactOccurred()
                         print("ESTOU CORRETO BRO")
                         self.playSoundLeft(sound: .SoundsLevelThreeSecond)
                         levelThreeIndex += 1
@@ -205,6 +229,7 @@ extension GameView {
                         withAnimation(.default){
                             self.attempts += 1
                         }
+                        impactRigid.impactOccurred()
                         levelThreeIndex = 0
                         showTextError = true
                         onTouch = false
@@ -214,17 +239,21 @@ extension GameView {
                 //DIREITA
                 else {
                     if levelThreeSequence[levelThreeIndex] == .SoundsLevelThreeFirst {
+                        impactRigid.impactOccurred()
                         print("acerrrtouuuuu")
                         self.playSoundRight(sound: .SoundsLevelThreeFirst)
                         levelThreeIndex += 1
                     } else if levelThreeSequence[levelThreeIndex] == .SoundsLevelThreeThird{
+                        impactRigid.impactOccurred()
                         print("OI")
                         self.playSoundRight(sound: .SoundsLevelThreeThird)
                         levelThreeIndex += 1
                     } else if levelThreeSequence[levelThreeIndex] == .SoundsLevelThreeFourth{
+                        impactRigid.impactOccurred()
                         self.playSoundRight(sound: .SoundsLevelThreeFourth)
                         levelThreeIndex += 1
                     }else{
+                        impactRigid.impactOccurred()
                         print("errooooou")
                         levelThreeIndex = 0
                         showTextError = true
@@ -241,7 +270,14 @@ extension GameView {
         }
         if levelThreeIndex == levelThreeSequence.count {
             print("acertou o level tres")
-            isLevelThreeComplete = true
+            onTouch = false
+            isTextLevelFour = true
+            showTextError = false
+            isLevelThreeStartSound = false
+            isStart = false
+            withAnimation(.easeInOut(duration: 3)){
+                isLevelThreeComplete = true
+            }
         }
     }
     //MARK: LEVEL FOUR
@@ -249,41 +285,49 @@ extension GameView {
         if onTouch == true {
             pos = tap
             animatedCircleView.animateCircles()
-            if tutorialIndex < tutorialSequence.count {
+            if levelFourIndex < levelFourSequence.count {
                 //ESQUERDA
                 if tap.x < UIScreen.main.bounds.width / 2 {
-                    if tutorialSequence[tutorialIndex]  == .SoundsLevelFourSecond  {
+                    if levelFourSequence[levelFourIndex]  == .SoundsLevelFourSecond  {
+                        impactRigid.impactOccurred()
                         print("ESTOU CORRETO BRO")
-                        self.playSoundLeft(sound: .thirdTutorialSong)
-                        tutorialIndex += 1
-                    }else if tutorialSequence[tutorialIndex]  == .SoundsLevelFourSecond {
                         self.playSoundLeft(sound: .SoundsLevelFourSecond)
-                        tutorialIndex += 1
+                        levelFourIndex += 1
+                    }else if levelFourSequence[levelFourIndex]  == .SoundsLevelFourThird {
+                        impactRigid.impactOccurred()
+                        self.playSoundLeft(sound: .SoundsLevelFourThird)
+                        levelFourIndex += 1
                     }else{
+                        impactRigid.impactOccurred()
                         print("ESTOU ERRADO BRO")
                         withAnimation(.default){
                             self.attempts += 1
                         }
-                        tutorialIndex = 0
+                        isStartLevelFourAnimation = false
+                        levelFourIndex = 0
                         showTextError = true
                         onTouch = false
                     }
                 }
                 //DIREITA
                 else {
-                    if tutorialSequence[tutorialIndex] == .SoundsLevelFourFirst {
+                    if levelFourSequence[levelFourIndex] == .SoundsLevelFourFirst {
+                        impactRigid.impactOccurred()
                         print("acerrrtouuuuu")
                         self.playSoundRight(sound: .SoundsLevelFourFirst )
-                        tutorialIndex += 1
-                    } else if tutorialSequence[tutorialIndex] == .SoundsLevelFourFourth{
+                        levelFourIndex += 1
+                    } else if levelFourSequence[levelFourIndex] == .SoundsLevelFourFourth{
+                        impactRigid.impactOccurred()
                         print("OI")
                         self.playSoundRight(sound: .SoundsLevelFourFourth)
-                        tutorialIndex += 1
+                        levelFourIndex += 1
                     } else {
+                        impactRigid.impactOccurred()
                         print("errooooou")
-                        tutorialIndex = 0
+                        levelFourIndex = 0
                         showTextError = true
                         onTouch = false
+                        isStartLevelFourAnimation = false
                         withAnimation(.default){
                             self.attempts += 1
                         }
@@ -293,9 +337,11 @@ extension GameView {
         }else{
             print("AQUI")
         }
-        if tutorialIndex == tutorialSequence.count {
-            print("acertou o tutorial")
-            isTutoriaComplete = true
+        if levelFourIndex == levelFourSequence.count {
+            print("acertou o level quatro")
+            withAnimation(.easeInOut(duration: 3)){
+                isLevelFourComplete = true
+            }
         }
     }
 }
