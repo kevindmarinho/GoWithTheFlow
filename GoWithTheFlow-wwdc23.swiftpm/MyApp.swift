@@ -13,7 +13,7 @@ struct MyApp: App {
         WindowGroup {
             NavigationView{
               //  SpriteView(scene: scene)
-                GameView()
+                IntroView()
             }
         }
     }

@@ -31,3 +31,28 @@ class LeafAnimation: SKScene {
 }
 
 
+public class airPodsAnimation: SKScene{
+    //static var shared = runHomeScene()
+    
+    public override func didMove(to view: SKView) {
+         let airpods = SKSpriteNode(imageNamed: "airpodsOne.png")
+        
+        airpods.run(.repeatForever(.animate(with: [
+        
+            SKTexture(imageNamed: "airpodsOne"),
+            SKTexture(imageNamed: "airpodsTwo"),
+        ], timePerFrame: 1.0)))
+        
+        airpods.position = CGPoint(x: 425, y: 50)
+        airpods.size = CGSize(width: 80, height: 60)
+        view.allowsTransparency = true
+        self.backgroundColor = .clear
+        view.alpha = 1
+        view.isOpaque = true
+        view.backgroundColor = SKColor.clear.withAlphaComponent(0.0)
+        
+        
+        
+        addChild(airpods)
+    }
+}

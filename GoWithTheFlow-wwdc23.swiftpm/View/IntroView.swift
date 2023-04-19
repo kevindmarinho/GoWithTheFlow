@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SpriteKit
 
 @available(iOS 16.0, *)
 struct IntroView: View {
@@ -17,31 +18,53 @@ struct IntroView: View {
     @State var isTextTwo = false
     @State var isTextThree = false
     @State var nextView = false
+    @State var fadeInOut = false
+    
+    var scene: SKScene{
+        let scene = airPodsAnimation()
+        scene.scaleMode = .resizeFill
+        return scene
+    }
+    
     
     var body: some View {
         ZStack{
-            Color.backgroundBlue
+            Color.black
                 .ignoresSafeArea(.all)
-            Image("backgroundGWTF")
+            Image("backgroundIntro")
                 .resizable()
                 .frame(width: UIScreen.main.bounds.width)
                 .ignoresSafeArea(.all)
                 .blur(radius: isDarkened ? 800 : 0)
                 .opacity(isDarkened ? 0 : 1)
                 .animation(.easeInOut(duration: 3.0))
+                .ignoresSafeArea(.all)
             ZStack{
                 
                 VStack(alignment: .center){
                     if isTextOne == true {
                         
-                        Text("Go With The Flow")
+                        Image("Logo")
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width * 0.63, height: UIScreen.main.bounds.height * 0.13)
+                            .padding(.top, 100)
+                            
+                        Spacer()
+                        SpriteView(scene: scene, options: [.allowsTransparency])
                         
-                        
-                        Text("For the best experience Use your airpods!")
+                   
+                        Spacer()
+                        Image("bestExp")
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width * 0.20, height: UIScreen.main.bounds.height * 0.10)
+                            .padding(.bottom, 30)
                     }
                     
                     if isTextTwo {
-                        Text("Some evils like anxiety can take away your calm, your color. But maybe some sounds can help something...")
+                        Image("firstText")
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.25)
+                        
                             .onAppear{
                                 withAnimation(.easeInOut(duration: 3)){
                                     isTextOne = false
@@ -51,7 +74,9 @@ struct IntroView: View {
                         
                     }
                     if isTextThree {
-                        Text("These sounds make our heart beat, our breathing rate, and our brain electrical rhythms change according to the rhythm and melody, in other words, Go With The Flow")
+                        Image("secondText")
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.height * 0.40)
     
                     }
                 
@@ -107,11 +132,18 @@ struct IntroView: View {
                                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                                     .background(Color.clear)
                                 withAnimation{
-                                    AnimatedTextNext(textNext: "TAP TO NEXT")
+                                    Image("tapToNext")
+                                        .resizable()
+                                        .frame(width: UIScreen.main.bounds.width * 0.13, height: UIScreen.main.bounds.height * 0.04)
+                                        .onAppear(){
+                                            withAnimation(Animation .easeInOut(duration: 0.6).repeatForever(autoreverses: true)){
+                                                fadeInOut.toggle()
+                                            }
+                                        }.opacity(fadeInOut ? 0 : 1)
                                         .alignmentGuide(.bottom) { dimension in
                                             dimension.height / 2
                                         }
-                                        .offset(x: -20, y: 100) // ajuste o offset de acordo com a posição desejada
+                                        .offset(x: -20, y: 150) // ajuste o offset de acordo com a posição desejada
                                 }
                             }
                         }

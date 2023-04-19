@@ -29,10 +29,12 @@ extension GameView {
                         }
                         impactRigid.impactOccurred()
                         tutorialIndex = 0
-                        showTextError = true
+                    //    withAnimation(.easeInOut(duration: 3)){
+                            showTextError = true
+                      //  }
                         onTouch = false
                         isPlayerTutorial = false
-
+                        isTutoriaComplete = false
                     }
                 }
                 //DIREITA
@@ -48,12 +50,15 @@ extension GameView {
                     } else {
                         impactRigid.impactOccurred()
                         tutorialIndex = 0
-                        showTextError = true
+               //         withAnimation(.easeInOut(duration: 3)){
+                            showTextError = true
+                ///        }
                         onTouch = false
                         isPlayerTutorial = false
                         withAnimation(.default){
                             self.attempts += 1
                         }
+                        isTutoriaComplete = false
                     }
                 }
             }
@@ -71,6 +76,7 @@ extension GameView {
             showTextError = false
             isStart = false
             isNext = false
+            
             
             
             
@@ -99,7 +105,9 @@ extension GameView {
                         }
                         impactRigid.impactOccurred()
                         levelOneIndex = 0
-                        showTextError = true
+                       // withAnimation{
+                            showTextError = true
+                       // }
                         onTouch = false
                         isLevelOneComplete = false
                         isStartLevelOneAnimation = false
@@ -118,7 +126,9 @@ extension GameView {
                     } else {
                         impactRigid.impactOccurred()
                         levelOneIndex = 0
-                        showTextError = true
+                       // withAnimation{
+                            showTextError = true
+                      //  }
                         onTouch = false
                         isLevelOneComplete = false
                         isStartLevelOneAnimation = false
@@ -187,7 +197,9 @@ extension GameView {
                     } else {
                         impactRigid.impactOccurred()
                         levelTwoIndex = 0
-                        showTextError = true
+                   //     withAnimation{
+                            showTextError = true
+                   //     }
                         onTouch = false
                         isStartLevelTwoAnimation = false
                         withAnimation(.default){
@@ -256,7 +268,9 @@ extension GameView {
                         impactRigid.impactOccurred()
                         print("errooooou")
                         levelThreeIndex = 0
-                        showTextError = true
+                  //      withAnimation{
+                            showTextError = true
+                  //      }
                         onTouch = false
                         isStartLevelThreeAnimation = false
                         withAnimation(.default){
@@ -305,7 +319,9 @@ extension GameView {
                         }
                         isStartLevelFourAnimation = false
                         levelFourIndex = 0
-                        showTextError = true
+                 //       withAnimation{
+                            showTextError = true
+                  //      }
                         onTouch = false
                     }
                 }
@@ -325,7 +341,9 @@ extension GameView {
                         impactRigid.impactOccurred()
                         print("errooooou")
                         levelFourIndex = 0
-                        showTextError = true
+                 //       withAnimation{
+                            showTextError = true
+                 //       }
                         onTouch = false
                         isStartLevelFourAnimation = false
                         withAnimation(.default){
@@ -341,6 +359,8 @@ extension GameView {
             print("acertou o level quatro")
             withAnimation(.easeInOut(duration: 3)){
                 isLevelFourComplete = true
+                isTextFive = true
+                isLevelFourStartSound = false
             }
         }
     }

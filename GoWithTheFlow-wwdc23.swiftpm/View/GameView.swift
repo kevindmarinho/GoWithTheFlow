@@ -41,6 +41,8 @@ struct GameView: View {
     @State var isTextLevelTwo = false
     @State var isTextLevelThree = false
     @State var isTextLevelFour = false
+    @State var isTextFive = false
+    @State var isFinalText = false
     //index touchs
     @State var tutorialIndex = 0
     @State var levelOneIndex = 0
@@ -70,6 +72,7 @@ struct GameView: View {
     @State var isStartLevelThreeAnimation: Bool = false
     @State var isStartLevelFourAnimation: Bool = false
     @State var showFirstImage: Bool = true
+    @State private var isDarkened = true
     
     @State var impactRigid = UIImpactFeedbackGenerator(style: .rigid)
     let generator = UINotificationFeedbackGenerator()
@@ -82,55 +85,65 @@ struct GameView: View {
     
     var body: some View {
         ZStack{
-            Color.backgroundBlue
+            Color.black
             ZStack(alignment: .center){
                 Image("backgroundGWTF")
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width)
                     .ignoresSafeArea(.all)
                     .modifier(Shake(animatableData: CGFloat(attempts)))
-                
+                    .blur(radius: isDarkened ? 800 : 0)
+                    .opacity(isDarkened ? 0 : 1)
+
                 Group{
                     Image("treeZero")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.80)
+                        .offset(y: 30)
                         .opacity(showFirstImage ? 1 : 0)
                     
                     if isTutoriaComplete == true {
                         Image("treeOne")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.80)
+                            .offset(y: 30)
                             .transition(.opacity)
                     }
                     if isLevelOneComplete == true {
                         Image("treeTwo")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.80)
+                            .offset(y: 30)
                             .transition(.opacity)
                     }
                     if isLevelTwoComplete == true {
                         Image("treeThree")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.80)
+                            .offset(y: 30)
                             .transition(.opacity)
                     }
                     if isLevelThreeComplete == true {
                         Image("treeFour")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.80)
+                            .offset(y: 30)
                             .transition(.opacity)
                     }
                     if isLevelFourComplete == true {
                         Image("treeFive")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.80)
+                            .offset(y: 30)
                             .transition(.opacity)
                     }
-                }
+                } .blur(radius: isDarkened ? 800 : 0)
+                    .opacity(isDarkened ? 0 : 1)
                 ZStack{
                     Group{
                         //animacao de tutorial
                         if isPlayerTutorial == true {
+                            
                             TutorialAnimation()
                         }
                         //inicio animacao level one
@@ -152,11 +165,13 @@ struct GameView: View {
                     }
                     //texto inicial tutorial
                     if showText == true{
-                        AnimatedTextView(text: levelOneWords.textTutorial, timer: 120)
+                        AnimatedTextView(text: levelOneWords.textTutorial, timer: 120, sizeWidth: 0.15, sizeHeight: 0.04)
+                            
+                        
                     }
                     //LETS TRY
                     if isStart == true {
-                        AnimatedTextView(text: levelOneWords.letsTryText, timer: 2.5)
+                        AnimatedTextView(text: levelOneWords.letsTryText, timer: 2.5, sizeWidth: 0.20, sizeHeight: 0.10)
                             .onAppear{
                                 print("pode comecar")
                                 Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false){_ in
@@ -174,21 +189,24 @@ struct GameView: View {
                     Group {
                         // texto level 1
                         if isTextLevelOne == true {
-                            AnimatedTextView(text: levelOneWords.levelOne, timer: 120)
+                            AnimatedTextView(text: levelOneWords.levelOne, timer: 120, sizeWidth: 0.30, sizeHeight: 0.10)
                                 .onAppear{
                                     onTouch = false
                                     isLevelOneStartSound = true
                                     
-                                    Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false){_ in
-                                        isButtonActiv = true
+                                    Timer.scheduledTimer(withTimeInterval: 0, repeats: false){_ in
+                                        withAnimation(.easeInOut(duration: 4)){
+                                            isButtonActiv = true
+                                        }
+                                            
+                                        
                                         
                                     }
-                                    
                                 }
                         }
                         //texto level 2
                         if isTextLevelTwo == true {
-                            AnimatedTextView(text: levelOneWords.levelTwo, timer: 120)
+                            AnimatedTextView(text: levelOneWords.levelTwo, timer: 120, sizeWidth: 0.40, sizeHeight: 0.10)
                                 .onAppear{
                                     onTouch = false
                                     isLevelTwoStartSound = true
@@ -203,7 +221,7 @@ struct GameView: View {
                         }
                         //text level 3
                         if isTextLevelThree == true {
-                            AnimatedTextView(text: levelOneWords.levelTree, timer: 120)
+                            AnimatedTextView(text: levelOneWords.levelTree, timer: 120, sizeWidth: 0.40, sizeHeight: 0.10)
                                 .onAppear{
                                     onTouch = false
                                     isLevelThreeStartSound = true
@@ -214,7 +232,7 @@ struct GameView: View {
                         }
                         //text level 4
                         if isTextLevelFour == true {
-                            AnimatedTextView(text: levelOneWords.levelFour, timer: 120)
+                            AnimatedTextView(text: levelOneWords.levelFour, timer: 120, sizeWidth: 0.40, sizeHeight: 0.10)
                                 .onAppear{
                                     onTouch = false
                                     isLevelFourStartSound = true
@@ -223,13 +241,40 @@ struct GameView: View {
                                     }
                                 }
                         }
+                        if isTextFive == true {
+                            AnimatedTextView(text: levelOneWords.finalTextOne, timer: 120, sizeWidth: 0.55, sizeHeight: 0.10)
+                                .onAppear{
+                                    onTouch = false
+                                    //isLevelFourStartSound = true
+                                    Timer.scheduledTimer(withTimeInterval: 6.5, repeats: false){_ in
+                                        withAnimation(.easeInOut(duration: 3.0)){
+                                            isTextFive = false
+                                            isFinalText = true
+                                            
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                        }
+                        if isFinalText == true {
+                            AnimatedTextView(text: levelOneWords.finalTextTwo, timer: 120, sizeWidth: 0.55, sizeHeight: 0.10)
+                                .onAppear{
+                                    Timer.scheduledTimer(withTimeInterval: 3.5, repeats: false){_ in
+                                        withAnimation(.easeInOut(duration: 3.0)){
+                                            isButtonActiv = true
+                                        }
+                                    }
+                                }
+                        }
                     }
                     //tratamento de erro
                     if showTextError == true{
-                        AnimatedTextView(text: levelOneWords.textError, timer: 3)
+                        AnimatedTextView(text: levelOneWords.textError, timer: 3, sizeWidth: 0.15, sizeHeight: 0.04)
                             .onAppear{
-                                print("entrou no erro")
+                                
                                 if isTutoriaComplete == false {
+                                    print("entrou no erro")
                                     onTouch = false
                                     tutorialSounds()
                                     isPlayerTutorial = true
@@ -264,6 +309,7 @@ struct GameView: View {
                 }
                 Spacer()
                 if isButtonActiv == true{
+                    
                     Button(action: {
                         isNext = true
                         if isNext == true && isTutoriaComplete == false{
@@ -315,6 +361,12 @@ struct GameView: View {
                             isStartLevelFourAnimation = true
                             
                         }
+                        if isLevelFourComplete == true {
+                            withAnimation(.easeInOut(duration: 3.0)){
+                                isDarkened = true
+                                isFinalText = false
+                            }
+                        }
                         
                         withAnimation{
                             isButtonActiv = false
@@ -334,7 +386,7 @@ struct GameView: View {
                                     .alignmentGuide(.bottom) { dimension in
                                         dimension.height / 2
                                     }
-                                    .offset(x: -20, y: 120) // ajuste o offset de acordo com a posição desejada
+                                    .offset(x: -20, y: 120)
                             }
                             
                         }
@@ -344,12 +396,12 @@ struct GameView: View {
             }
             // PRECISAR SAIR DAQUI QUANDO CRIAR A VIEW ANTERIOR
             .onAppear{
-                Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) {_ in
-                    withAnimation{
+                Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) {_ in
+                    withAnimation(.easeInOut(duration: 3)){
                         showText = true
                     }
                 }
-                Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) {_ in
+                Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) {_ in
                     withAnimation{
                         isButtonActiv = true
                     }
@@ -377,8 +429,18 @@ struct GameView: View {
                 }
                 print("tocando")
             }
-  
-            SpriteView(scene: scene, options: [.allowsTransparency])
+            if showTextError == true {
+                withAnimation(.easeOut(duration: 3)){
+                    SpriteView(scene: scene, options: [.allowsTransparency])
+                }
+            }
+        }
+        .ignoresSafeArea(.all)
+        .navigationBarBackButtonHidden(true)
+        .onAppear { // Atualizando o valor do estado no onAppear
+            withAnimation(.easeInOut(duration: 3.0)) {
+                isDarkened = false
+            }
         }
     }
     
